@@ -35,27 +35,27 @@ def check_quota( ip ):
 		return 4
 
 
-def log_skip( ip ):
+def log_skip( ip, name ):
 	datestring = date_string()
 	try:
 		db = mysql.connector.Connect(**config)
 		cursor = db.cursor()
-		cursor.execute( 'INSERT INTO `skips` (`ip`, `date`) VALUES ("%s", "%s");' % ( ip, datestring ) )
+		cursor.execute( 'INSERT INTO `skips` (ip, date, name) VALUES ("%s", "%s", "%s");' % ( ip, datestring, name ) )
 		db.close()
 	except:
-		print 'didnt work INSERT INTO `skips` (`ip`, `date`) VALUES ("%s", "%s");' % ( ip, datestring )
+		print 'didnt work'
 
 
 
-@route('/check')
+@route('/check/')
 def index():
 	ip = request.environ.get('REMOTE_ADDR')
 	quota = check_quota( ip )
 	response = { 'status' : 'ok', 'quota' : quota }
 	return json.dumps( response )
 
-@route('/next')
-def next():
+@route('/next/:name')
+def next(name):
 	pprint(vars(request))
 	ip = request.environ.get('REMOTE_ADDR')
 	quota = check_quota( ip )
@@ -77,7 +77,7 @@ def next():
 			response['error'] = error
 			print error
 
-	log_skip( ip )
+	log_skip( ip, name )
 
 	response['status'] = status
 	response['quota'] = int( quota - 1 )

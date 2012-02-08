@@ -29,10 +29,11 @@ document.addEventListener('DOMContentLoaded',function(){
 	*/
 	function talkToSpotifyServer( action, callback, data )
 	{
-		var req = new XMLHttpRequest()
-		responded = false;
+		var req = new XMLHttpRequest(),
+			responded = false;
 
-		req.open( 'GET', 'http://' + spotifyHost + ':' + spotifyPort + '/' + action, true );
+
+		req.open( 'GET', 'http://' + spotifyHost + ':' + spotifyPort + '/' + action + '/' + data, true );
 		req.onload = function () {
 		if( responded ){
 			return;
@@ -45,12 +46,9 @@ document.addEventListener('DOMContentLoaded',function(){
 		}
 		responded = true;
 		};
-		if( data ){
-			req.send( data );
-			console.log(data);
-		}else{
-			req.send( null );
-		}
+
+		req.send( null );
+		
 
 	}
 	
@@ -107,7 +105,7 @@ document.addEventListener('DOMContentLoaded',function(){
 		update_nexts( res.quota );
 		}
 
-	}, false );
+	}, '' );
 	
 
 	document.getElementById('next').addEventListener('click', function(e){
