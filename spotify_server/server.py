@@ -56,7 +56,7 @@ def index():
 
 @route('/next/:name')
 def next(name):
-	
+
 	ip = request.environ.get('REMOTE_ADDR')
 	quota = check_quota( ip )
 
