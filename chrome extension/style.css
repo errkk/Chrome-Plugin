@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('font/BebasNeue-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body { min-width:357px;overflow-x:hidden; font-family:arial; padding:7px; color:#333; 
+       background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.43, rgb(250,250,250)),
+	color-stop(0.05, rgb(230,230,230))
+);}
+
+    a{text-decoration:none;}
+    a:hover{text-decoration:none;}
+    a:focus{text-decoration:none;}
+    
+    h1{font-family: BebasNeueRegular; text-shadow:0 1px 1px #fff; display: inline-block; margin:4px 0 20px;}
+    
+    #list{ height:100px; overflow-y:scroll; padding:5px; font-size:0.8em; color:#555; }
+	#list li { padding:5px 2px; border-bottom:1px solid #ddd; }
+
+    .container{ position:relative; display:table; width:100%; border:1px solid #eee; box-shadow: 0 1px 1px #ddd; border-radius: 5px; padding:10px; background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.43, rgb(255,255,255)),
+	color-stop(0, rgb(245,245,245))
+);
+    }
+	.container #now{ font-weight:bold; font-size:1em; padding:5px 5px 5px 30px; background:url(img/record.png) 0 50% no-repeat; float:left; width:70%; }
+    
+	.container .actions{ border-left:1px solid #eee; display:block; position: absolute; top:0; right:0; bottom:0;  text-align:right; padding:3px;}
+	    .container .actions #next{ font-size:1em; padding:2px 6px; display:block; color:#444; text-shadow:0 1px 1px #fff; }
+	    .container .actions #like{ font-size:1em; padding:2px 6px; display:block; color:#444; text-shadow:0 1px 1px #fff; }
+    
+    #skips{display:inline-block; float:right; font-family: BebasNeueRegular; font-size:2em; border-radius: 40px; padding:4px 15px 0; color:#fff; text-shadow:0 1px 1px #631102;
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.43, rgb(143,21,0)),
+	color-stop(1, rgb(255,30,0))
+    );
+    }
+    #status{display:inline-block; border-radius: 20px; width: 10px; height:10px; text-indent: -999px; 
+       background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.13, rgb(65,230,0)),
+	color-stop(1, rgb(39,150,9))
+    );
+    }
+
