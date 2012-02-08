@@ -1,0 +1,6 @@
+
+*.pyc
+
+spotify_server/.idea/*
+
+spotify_server/lib/config.py
