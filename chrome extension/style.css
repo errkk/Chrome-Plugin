@@ -20,7 +20,9 @@ body { min-width:357px;overflow-x:hidden; font-family:arial; padding:7px; color:
     
     h1{font-family: BebasNeueRegular; text-shadow:0 1px 1px #fff; display: inline-block; margin:4px 0 20px;}
     
+    #favs,
     #list{ height:100px; overflow-y:scroll; padding:5px; font-size:0.8em; color:#555; }
+	#favs li,
 	#list li { padding:5px 2px; border-bottom:1px solid #ddd; }
 
     .container{ position:relative; display:table; width:100%; border:1px solid #eee; box-shadow: 0 1px 1px #ddd; border-radius: 5px; padding:10px; background-image: -webkit-gradient(

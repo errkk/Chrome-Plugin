@@ -69,7 +69,7 @@ def next(name):
 	else:
 
 		try:
-#            subprocess.call(['sh/next.sh'])
+			subprocess.call(['sh/next.sh'])
 			status = 'ok'
 		except:
 			error= 'Could not do shell script'

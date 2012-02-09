@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded',function(){
 	var spotifyHost = 'localhost'
 		spotifyPort = 8080,
 		quota = 3,
-		current_song = null;
+		current_song = null,
+		favs = false;
 	
 	
 	/**
@@ -20,7 +21,13 @@ document.addEventListener('DOMContentLoaded',function(){
 	function update_nexts( nexts )
 	{
 		quota = nexts;
-		document.getElementById('skips').innerHTML = quota;
+		if( quota > 0 ){
+		    chrome.browserAction.setBadgeText( {'text' : quota.toString()} );
+		    chrome.browserAction.setBadgeBackgroundColor( {'color': [0,150,0,255]} );
+		}else{
+		    chrome.browserAction.setBadgeText( {'text' : 'x'} );
+		    chrome.browserAction.setBadgeBackgroundColor( {'color': [150,0,0,255]} );
+		}
 
 	}
 
@@ -52,6 +59,27 @@ document.addEventListener('DOMContentLoaded',function(){
 
 	}
 	
+	function update_favs_list()
+	{
+	    // Populate favs
+	    if( get_favs( true ) ){
+		var el_favs = document.getElementById('favs');
+		
+		while ( el_favs.childNodes.length >= 1 ){
+		    el_favs.removeChild( el_favs.firstChild );       
+		}
+		
+		for ( fav in favs.reverse() ){
+		    var li = document.createElement("li");
+		    li.innerHTML = favs[fav];
+		    li.addEventListener('click',function(){
+			remove_fav( this.innerHTML );
+		    }, true);
+		    el_favs.appendChild(li);
+		}
+	    }
+	}
+	
 	
 	
 	// Get current tracks
@@ -70,13 +98,14 @@ document.addEventListener('DOMContentLoaded',function(){
 
 		now.innerHTML = current_song;
 
-
-		for (var i = 1, item; item = items[i]; i++) {
+		// populate current tracks
+		for ( var i = 1, item; item = items[i++]; ) {
 			var li = document.createElement("li");
 			li.innerHTML = item.getElementsByTagName("title")[0].firstChild.nodeValue;
 			document.getElementById('list').appendChild(li);
 		}
 		}
+		update_favs_list();
 	})();
 
 
@@ -93,10 +122,6 @@ document.addEventListener('DOMContentLoaded',function(){
 		var span = document.createElement( 'span' );
 		span.id = 'status';
 		document.getElementById('title').appendChild( span );
-
-		var skips = document.createElement( 'span' );
-		skips.id = 'skips';
-		document.getElementById('header').appendChild( skips );
 		}
 
 
@@ -107,7 +132,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
 	}, '' );
 	
-
+	// Next button handler
 	document.getElementById('next').addEventListener('click', function(e){
 
 	if( quota < 1 ){
@@ -138,6 +163,63 @@ document.addEventListener('DOMContentLoaded',function(){
 
 	e.preventDefault();
 	}, true );
+	
+	
+	// LIKE button handler
+	document.getElementById('like').addEventListener('click', function(e){
+	    save_fav( current_song );
+	    e.preventDefault();
+	}, true );
+	
+	
+	
+	
+	/**
+	 * Save a song to current storage
+	 */
+	function save_fav( song )
+	{
+	    var new_favs = get_favs( true );
+	    
+	    // Check its not already in there
+	    if( favs.indexOf(song) < 0 ){
+		new_favs.push( song );
+		localStorage.setItem( 'favs', JSON.stringify( new_favs ) );
+		// Update list elements thats displayed
+		update_favs_list();
+	    }
+	}
+	
+	/**
+	 * retrieve saved favorites, set true to update from localstorage
+	 */
+	function get_favs( update )
+	{
+	    if( !favs || update ){
+		if( localStorage.getItem( 'favs' ) ){
+		    favs = JSON.parse( localStorage.getItem( 'favs' ) );
+		}else{
+		    favs = [];
+		}
+	    }
+	    return favs;
+	}
+	
+	
+	function remove_fav( song )
+	{
+	    var new_favs = get_favs( true );
+	    
+	    // Check its not already in there
+	    var index = new_favs.indexOf(song);
+	    if( index >= 0 ){
+		new_favs.splice( index, 1 );
+		
+		localStorage.setItem( 'favs', JSON.stringify( new_favs ) );
+		// Update list elements thats displayed
+		update_favs_list();
+	    }
+	}
 
 
 }, false ); // End Dom ready
