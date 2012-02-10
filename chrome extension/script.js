@@ -70,12 +70,21 @@ document.addEventListener('DOMContentLoaded',function(){
 		}
 		
 		for ( fav in favs.reverse() ){
-		    var li = document.createElement("li");
-		    li.innerHTML = favs[fav];
-		    li.addEventListener('click',function(){
-			remove_fav( this.innerHTML );
-		    }, true);
-		    el_favs.appendChild(li);
+		    var li = document.createElement("li"),
+			del = document.createElement("span"),
+			title = favs[fav];
+		    
+		    li.innerHTML = title;
+		    del.innerHTML = '&times;';
+		    
+		    // delete button
+		    del.addEventListener('click',function(){
+			remove_fav( title );
+		    }, false );
+		    
+		    li.appendChild( del );
+		    
+		    el_favs.appendChild( li );
 		}
 	    }
 	}

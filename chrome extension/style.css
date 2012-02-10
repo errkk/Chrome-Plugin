@@ -24,6 +24,10 @@ body { min-width:357px;overflow-x:hidden; font-family:arial; padding:7px; color:
     #list{ height:100px; overflow-y:scroll; padding:5px; font-size:0.8em; color:#555; }
 	#favs li,
 	#list li { padding:5px 2px; border-bottom:1px solid #ddd; }
+	
+	#favs li{padding-right:40px;}
+	#favs li span{margin-right:-40px; cursor: pointer; display:block; float:right; background:#444; color:#fff; border-radius:10px; height:10px; padding:0 4px 6px; vertical-align: middle;}
+	#favs li span:hover{background:#222;}
 
     .container{ position:relative; display:table; width:100%; border:1px solid #eee; box-shadow: 0 1px 1px #ddd; border-radius: 5px; padding:10px; background-image: -webkit-gradient(
 	linear,

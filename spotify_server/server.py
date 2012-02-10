@@ -71,16 +71,18 @@ def next(name):
 		try:
 			subprocess.call(['sh/next.sh'])
 			status = 'ok'
+			response['quota'] = int( quota - 1 )
+			log_skip( ip, name )
 		except:
 			error= 'Could not do shell script'
 			status = 'fail'
 			response['error'] = error
 			print error
 
-	log_skip( ip, name )
+	
 
 	response['status'] = status
-	response['quota'] = int( quota - 1 )
+	
 	return json.dumps( response )
 
 
