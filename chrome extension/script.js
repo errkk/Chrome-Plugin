@@ -8,7 +8,7 @@
 */
 document.addEventListener('DOMContentLoaded',function(){
 	
-	var spotifyHost = 'localhost'
+	var spotifyHost = 'bok2damuzik'
 		spotifyPort = 8080,
 		quota = 3,
 		current_song = null,

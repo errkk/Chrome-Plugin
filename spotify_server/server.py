@@ -85,10 +85,6 @@ def next(name):
 	
 	return json.dumps( response )
 
-
-
-debug(True)
-
 run( server='tornado', port=8080 )
 
 
