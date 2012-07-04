@@ -1,3 +1,5 @@
+
+#!/usr/bin/python
 from bottle import route, run,request,debug
 import simplejson, urllib, json
 import subprocess
