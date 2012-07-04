@@ -3,7 +3,7 @@ import simplejson, urllib, json
 import subprocess
 import mysql.connector
 from datetime import datetime
-from pprint import pprint
+
 
 from lib.config import Config
 config = Config.dbinfo().copy()

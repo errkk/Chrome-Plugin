@@ -9,7 +9,7 @@
   "permissions": [
     "http://ws.audioscrobbler.com/",
 	"http://10.10.50.60/",
-	"http://bok2damuzik/"
+	"http://empty1/"
   ],
   "icons" : {
       "16" : "img/icon@16.png",
