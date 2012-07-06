@@ -8,7 +8,7 @@
 */
 document.addEventListener('DOMContentLoaded',function(){
 	
-	var spotifyHost = 'empty1'
+	var spotifyHost = '10.10.50.163'
 		spotifyPort = 8080,
 		quota = 3,
 		current_song = null,
